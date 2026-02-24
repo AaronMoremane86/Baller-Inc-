@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sir A La Cafe - Premium Coffee & Cuisine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --accent-color: #F4A460;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f9f7f4;
+            --cream-bg: #fffbf0;
+            --text-dark: #333;
+            --text-light: #fff;
+            --border-color: #ddd;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+        }
+
+        body {
+            font-family: 'Georgia', 'Garamond', serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--cream-bg);
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-color) 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(139, 69, 19, 0.7), rgba(210, 105, 30, 0.7)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f9f7f4" width="1200" height="600"/><circle cx="300" cy="150" r="40" fill="%23D2691E" opacity="0.1"/><circle cx="900" cy="450" r="60" fill="%238B4513" opacity="0.1"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            font-family: 'Georgia', serif;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .hero-btn {
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            padding: 0.9rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-btn:hover {
+            background: var(--primary-color);
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 2.5rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 1.5rem;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        section h2::before {
+            content: '☕';
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Menu Section */
+        #menu {
+            background: var(--cream-bg);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .menu-card {
+            background: linear-gradient(135deg, #fff 0%, #fffbf0 100%);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.15);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--accent-color), transparent);
+            opacity: 0.05;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(139, 69, 19, 0.25);
+            border-left-color: var(--primary-color);
+        }
+
+        .menu-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.2rem;
+            font-size: 1.6rem;
+            font-family: 'Georgia', serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-card p {
+            color: #555;
+            line-height: 1.9;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-card strong {
+            color: var(--secondary-color);
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--cream-bg) 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 2;
+            color: #555;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            list-style: none;
+        }
+
+        .about-features li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #555;
+        }
+
+        .about-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            padding: 3rem;
+            text-align: center;
+            color: var(--text-light);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2);
+        }
+
+        .about-image h3 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-image p {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--text-light);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #f0ebe5 0%, #faf7f2 100%);
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.1);
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .contact-info strong {
+            color: var(--secondary-color);
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--accent-color);
+            color: var(--text-light);
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Form Styles */
+        form {
+            background: linear-gradient(135deg, #f0ebe5 0%, #faf7f2 100%);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-family: 'Georgia', serif;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--cream-bg);
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 8px rgba(244, 164, 96, 0.3);
+            background: var(--text-light);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 6px;
+            display: none;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border-color: #28a745;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-color) 100%);
+            color: var(--text-light);
+            text-align: center;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        footer .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1.5rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">☕ Sir A La Cafe</a>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Sir A La Cafe Pty Ltd</h1>
+            <p>Crafted Coffee | Premium Cuisine | Unforgettable Experience</p>
+            <button class="hero-btn">Explore Menu</button>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <div class="container">
+            <h2>Our Menu</h2>
+            <div class="menu-grid">
+                <!-- Coffee Section -->
+                <div class="menu-card">
+                    <h3>☕ Signature Coffees</h3>
+                    <p>
+                        <strong>Espresso:</strong> R25.00<br>
+                        <strong>Americano:</strong> R28.00<br>
+                        <strong>Cappuccino:</strong> R35.00<br>
+                        <strong>Latte:</strong> R35.00<br>
+                        <strong>Flat White:</strong> R38.00<br>
+                        Expertly crafted with premium, locally-sourced beans.
+                    </p>
+                </div>
+
+                <!-- Specialty Drinks -->
+                <div class="menu-card">
+                    <h3>🥤 Specialty Drinks</h3>
+                    <p>
+                        <strong>Macchiato:</strong> R32.00<br>
+                        <strong>Mocha:</strong> R40.00<br>
+                        <strong>Caramel Latte:</strong> R42.00<br>
+                        <strong>Cold Brew:</strong> R30.00<br>
+                        <strong>Iced Coffee:</strong> R28.00<br>
+                        Refreshing options for every season.
+                    </p>
+                </div>
+
+                <!-- Breakfast Menu -->
+                <div class="menu-card">
+                    <h3>🥐 Breakfast Menu</h3>
+                    <p>
+                        <strong>Croissant:</strong> R22.00<br>
+                        <strong>Pain au Chocolat:</strong> R25.00<br>
+                        <strong>Eggs Benedict:</strong> R48.00<br>
+                        <strong>Avocado Toast:</strong> R45.00<br>
+                        <strong>Fruit Smoothie Bowl:</strong> R42.00<br>
+                        Start your day with deliciousness.
+                    </p>
+                </div>
+
+                <!-- Lunch Specials -->
+                <div class="menu-card">
+                    <h3>🍽️ Lunch Specials</h3>
+                    <p>
+                        <strong>Gourmet Sandwich:</strong> R52.00<br>
+                        <strong>Quiche of the Day:</strong> R45.00<br>
+                        <strong>Mediterranean Salad:</strong> R48.00<br>
+                        <strong>Panini:</strong> R55.00<br>
+                        <strong>Soup & Bread Combo:</strong> R38.00<br>
+                        Satisfying options for lunch lovers.
+                    </p>
+                </div>
+
+                <!-- Desserts -->
+                <div class="menu-card">
+                    <h3>🍰 Desserts & Pastries</h3>
+                    <p>
+                        <strong>Tiramisu:</strong> R35.00<br>
+                        <strong>Chocolate Cake Slice:</strong> R30.00<br>
+                        <strong>Cheesecake:</strong> R38.00<br>
+                        <strong>Macarons (Pair):</strong> R28.00<br>
+                        <strong>Fresh Fruit Tart:</strong> R32.00<br>
+                        Sweet indulgences crafted with care.
+                    </p>
+                </div>
+
+                <!-- Beverages -->
+                <div class="menu-card">
+                    <h3>🍷 Premium Beverages</h3>
+                    <p>
+                        <strong>Fresh Juice:</strong> R22.00<br>
+                        <strong>Smoothie:</strong> R32.00<br>
+                        <strong>Hot Chocolate:</strong> R30.00<br>
+                        <strong>Tea Selection:</strong> R18.00<br>
+                        <strong>Soft Drinks:</strong> R15.00<br>
+                        Refreshments for every palate.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Sir A La Cafe</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Welcome to Sir A La Cafe Pty Ltd, where we believe that every cup of coffee tells a story and 
+                        every meal creates memories. Since our opening, we've been committed to providing our valued 
+                        customers with an exceptional dining experience.
+                    </p>
+                    <p>
+                        Our passion lies in sourcing the finest ingredients, brewing the perfect cup of coffee, and 
+                        creating dishes that delight the senses. From our cozy ambiance to our attentive service, 
+                        every detail is crafted with your satisfaction in mind.
+                    </p>
+                    <ul class="about-features">
+                        <li>Premium Quality Coffee Beans</li>
+                        <li>Fresh, Locally-Sourced Ingredients</li>
+                        <li>Expert Baristas & Skilled Chefs</li>
+                        <li>Warm, Welcoming Atmosphere</li>
+                        <li>Exceptional Customer Service</li>
+                        <li>Catering Services Available</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <h3>Est. 2020</h3>
+                    <p>Your Premier Destination for Coffee & Cuisine</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>
+                        <strong>Business Name:</strong><br>
+                        Sir A La Cafe Pty Ltd
+                    </p>
+                    <p>
+                        <strong>Address:</strong><br>
+                        123 Main Street<br>
+                        Johannesburg, Gauteng 2000<br>
+                        South Africa
+                    </p>
+                    <p>
+                        <strong>Phone:</strong><br>
+                        +27 (0) 11 234 5678<br>
+                        +27 (0) 82 123 4567
+                    </p>
+                    <p>
+                        <strong>Email:</strong><br>
+                        info@siralacafe.co.za<br>
+                        reservations@siralacafe.co.za
+                    </p>
+                    <p>
+                        <strong>Business Hours:</strong><br>
+                        Monday - Friday: 7:00 AM - 8:00 PM<br>
+                        Saturday: 8:00 AM - 9:00 PM<br>
+                        Sunday: 8:30 AM - 7:00 PM
+                    </p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="Twitter">𝕏</a>
+                        <a href="#" title="WhatsApp">💬</a>
+                    </div>
+                </div>
+
+                <form id="contact-form">
+                    <div class="alert" id="alert-message"></div>
+
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+27 (0) 123 456 789">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">-- Select Subject --</option>
+                            <option value="reservation">Reservation Inquiry</option>
+                            <option value="catering">Catering Services</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="partnership">Business Partnership</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>Sir A La Cafe Pty Ltd is dedicated to serving premium coffee and cuisine in a warm, welcoming atmosphere.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="#menu">Menu</a></p>
+                    <p><a href="#about">About</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Business Hours</h4>
+                    <p>Mon - Fri: 7:00 AM - 8:00 PM</p>
+                    <p>Sat: 8:00 AM - 9:00 PM</p>
+                    <p>Sun: 8:30 AM - 7:00 PM</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Sir A La Cafe Pty Ltd. All rights reserved.</p>
+                <p>Premium Coffee | Exceptional Cuisine | Warm Hospitality</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize contact form
+            const contactForm = document.getElementById('contact-form');
+            const alertBox = document.getElementById('alert-message');
+
+            // Form submission handler
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get form values
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                // Validation
+                if (!name || !email || !subject || !message) {
+                    showAlert('Please fill in all required fields.', 'error');
+                    return;
+                }
+
+                if (!isValidEmail(email)) {
+                    showAlert('Please enter a valid email address.', 'error');
+                    return;
+                }
+
+                // Simulate form submission
+                contactForm.style.opacity = '0.6';
+                contactForm.style.pointerEvents = 'none';
+
+                setTimeout(() => {
+                    showAlert('Thank you for contacting Sir A La Cafe! We will respond to your inquiry shortly.', 'success');
+                    contactForm.reset();
+                    contactForm.style.opacity = '1';
+                    contactForm.style.pointerEvents = 'auto';
+                }, 1000);
+            });
+
+            // Alert display function
+            function showAlert(message, type) {
+                alertBox.textContent = message;
+                alertBox.className = `alert ${type}`;
+                alertBox.style.display = 'block';
+
+                // Auto-hide alert after 5 seconds
+                setTimeout(() => {
+                    alertBox.style.display = 'none';
+                }, 5000);
+            }
+
+            // Email validation function
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Explore Menu button functionality
+            document.querySelector('.hero-btn').addEventListener('click', () => {
+                const menuSection = document.getElementById('menu');
+                menuSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+
+            // Add active state to navigation
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const sections = document.querySelectorAll('section');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollY >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
